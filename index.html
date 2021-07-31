@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <section>
+        <div class="container py-5">
+            <h1 class=" text-center fw-bolder text-decoration-underline">CRUD Project</h1>
+            <div class="form-group">
+                <label for="productName">Product Name :</label>
+                <input type="text" name="" class=" form-control" id="productName">
+            </div>
+
+            <div class="form-group">
+                <label for="productPrice">Product Price :</label>
+                <input type="number" name="" class=" form-control" id="productPrice">
+            </div>
+
+            <div class="form-group">
+                <label for="productCategory">Product Category :</label>
+                <input type="text" name="" class=" form-control" id="productCategory">
+            </div>
+
+            <div class="form-group">
+                <label for="productDescription">Product Description :</label>
+                <!-- <textarea type="text" name="" class=" form-control" id="productDescription"> -->
+                <textarea name="" id="productDescription" class=" form-control" cols="30" rows="5"></textarea>
+            </div>
+
+            <button id="mainButton" onclick="checkMainBtn()" class=" btn btn-outline-primary mt-3">Add product</button>
+        </div>
+    </section>
+
+    <section id="display" class="py-5 bg-light">
+        <div class="container">
+
+            <input type="text" onkeyup="searchProduct(this.value)" class=" my-4 w-75 m-auto form-control" placeholder="Search product">
+
+            <table class=" table">
+                <thead>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th></th>
+                    <th></th>
+
+                </thead>
+
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

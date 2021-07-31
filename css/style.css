@@ -1,0 +1,13 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:after,
+*:before {
+    box-sizing: inherit;
+}
+
+.form-group {
+    margin-top: 5px !important;
+}
