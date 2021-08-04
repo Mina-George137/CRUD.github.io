@@ -3,8 +3,30 @@ let productPriceInput = document.getElementById("productPrice");
 let productCategoryInput = document.getElementById("productCategory");
 let productDescriptionInput = document.getElementById("productDescription");
 let mainBtn = document.getElementById("mainButton");
+let warningQuote = document.getElementById("warningName");
 let productsArray;
 var globalIndex;
+
+function validProductName() {
+    var regexProductName = /^[A-Z][a-z]{2,}$/;
+    if (regexProductName.test(productNameInput.value)) {
+        console.log("valid");
+        productNameInput.classList.add("is-valid");
+        productNameInput.classList.remove("is-invalid");
+        warningQuote.style.display = "none";
+        return true;
+    } else {
+        console.log("invalid");
+        productNameInput.classList.add("is-invalid");
+        productNameInput.classList.remove("is-valid");
+        warningQuote.style.display = "block";
+
+        return false;
+    }
+}
+
+productNameInput.addEventListener("keydown", validProductName);
+
 if (localStorage.getItem("products") != null) {
     productsArray = JSON.parse(localStorage.getItem("products"));
     displayProducts(productsArray);
@@ -17,24 +39,26 @@ function checkMainBtn() {
         updateProduct(globalIndex);
         console.log("from the check : " + globalIndex);
 
-        mainBtn.innerText = "Add product"
+        mainBtn.innerText = "Add product";
     } else {
         create();
     }
 }
 
 function create() {
-    let product = {
-        name: productNameInput.value,
-        price: productPriceInput.value,
-        category: productCategoryInput.value,
-        description: productDescriptionInput.value,
-    };
-    productsArray.push(product);
-    localStorage.setItem("products", JSON.stringify(productsArray));
-    clearForm();
-    displayProducts(productsArray);
-    console.log(productsArray);
+    if (validProductName() == true) {
+        let product = {
+            name: productNameInput.value,
+            price: productPriceInput.value,
+            category: productCategoryInput.value,
+            description: productDescriptionInput.value,
+        };
+        productsArray.push(product);
+        localStorage.setItem("products", JSON.stringify(productsArray));
+        clearForm();
+        displayProducts(productsArray);
+        console.log(productsArray);
+    }
 }
 
 function clearForm() {
@@ -80,8 +104,10 @@ function deleteProduct(productIndex) {
 function searchProduct(searchTerm) {
     let foundedProducts = [];
     for (let i = 0; i < productsArray.length; i++) {
-        if (productsArray[i].name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            productsArray[i].category.toLowerCase().includes(searchTerm.toLowerCase())) {
+        if (
+            productsArray[i].name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            productsArray[i].category.toLowerCase().includes(searchTerm.toLowerCase())
+        ) {
             foundedProducts.push(productsArray[i]);
         } else {
             console.log("Not Found");
