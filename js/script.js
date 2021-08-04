@@ -7,6 +7,13 @@ let warningQuote = document.getElementById("warningName");
 let productsArray;
 var globalIndex;
 
+if (localStorage.getItem("products") != null) {
+    productsArray = JSON.parse(localStorage.getItem("products"));
+    displayProducts(productsArray);
+} else {
+    productsArray = [];
+}
+
 function validProductName() {
     var regexProductName = /^[A-Z][a-z]{2,}$/;
     if (regexProductName.test(productNameInput.value)) {
@@ -27,15 +34,10 @@ function validProductName() {
 
 productNameInput.addEventListener("keydown", validProductName);
 
-if (localStorage.getItem("products") != null) {
-    productsArray = JSON.parse(localStorage.getItem("products"));
-    displayProducts(productsArray);
-} else {
-    productsArray = [];
-}
+
 
 function checkMainBtn() {
-    if (mainBtn.innerText == "update") {
+    if (mainBtn.innerText == "update" && validProductName() == true) {
         updateProduct(globalIndex);
         console.log("from the check : " + globalIndex);
 
